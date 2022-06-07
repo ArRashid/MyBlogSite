@@ -3,3 +3,4 @@ Media/
 STATIC/
 *.png
 *.jpeg
+*.sqlite3

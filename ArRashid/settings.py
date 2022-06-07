@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
     'Home.apps.HomeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -126,6 +127,9 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 MEDIA_URL = '/media/'
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
