@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% block body %}
+	<!-- MENU Start ================================================== -->
+
+	<nav class="navbar navbar-default">
+		<div class="container">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		    </div> <!-- End of /.navbar-header -->
+
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      	<ul class="nav navbar-nav nav-main">
+		        	<li class="active"><a href="/">HOME</a></li>
+					<li><a href="/blog">BLOG</a></li>
+					<li><a href="/study">STUDY</a></li>
+					<li><a href="/comunity">COMUNITY</a></li>
+					<li><a href="/media">MEDIA</a></li>
+					<li><a href="">TEAM</a></li>
+					<li><a href="#">PORTFOLIO</a></li>
+					<li class="dropdown">
+						<a href="#">
+							SERVICES
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+						   <li><a  href="#">We Can Build Your Web Site</a></li>
+						    <li><a  href="#">We Can Build Your Softwere</a></li>
+						    <li><a  href="#">We Can Management Assets</a></li>
+						    <li><a  href="#">Other Services</a></li>
+						</ul>
+					</li> <!-- End of /.dropdown -->
+
+					
+		        </ul> <!-- End of /.nav-main -->
+		    </div>	<!-- /.navbar-collapse -->
+		</div>	<!-- /.container-fluid -->
+	</nav>	<!-- End of /.nav -->
+
+
+	<!-- SLIDER Start
+    ================================================== -->
+
+
+	<section id="slider-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="slider" class="nivoSlider">
+				    	<img src="/static/images/slider.jpg" alt="" />
+				    	<img src="/static/images/slider1.jpg" alt=""/>
+				    	<img src="/static/images/slider2.jpg" alt="" />
+					</div>	<!-- End of /.nivoslider -->
+				</div>	<!-- End of /.col-md-12 -->
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</section> <!-- End of Section -->
+
+
+	
+	<!-- FEATURES Start
+    ================================================== -->
+
+	<section id="features">
+		<div class="container">
+			<div class="row">
+				{% for feature in features %}
+				<a href="{{feature.link}}">
+				<div class="col-md-4">
+					<div class="block">
+						<div class="media">
+							<div class="pull-left" href="{{feature.link}}">
+								{% if feature.icon %}
+						    	<img src="/media/{{feature.icon}}" height="50" width="50" alt="">
+								{% else %}
+								&nbsp;
+								{% endif %}
+						  	</div>
+						  	<div class="media-body">
+						    	<h4 class="media-heading">{{feature.title}}</h4>
+						    	<p>{{feature.details}}</p>
+						  </div>
+						</div>
+					</div>
+				</div>
+				</a>
+				{% endfor %}
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</section>	<!-- End of section -->
+
+
+
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="block">
+					<div class="block-heading">
+						<h2>WHO we Are</h2>
+					</div>
+				</div>	<!-- End of /.block -->
+			
+					<center><p>
+						Welcome to our site. Our endeavor through this site is that anyone can join us and earn their skills and money.
+If you want to join a group ,Which can help you to learn and eran, then you have come to the right place.
+We can improve ourselves here by practicing within ourselves.
+And we can make income by doing project of our clients by using thouse skills.
+Since no big project can be done by anyone alone. 
+So our team will mile. Where everyone's field will work with different skills.
+					</p></center>
+			
+		</div> <!-- End Of /.Row -->
+	</div>
+
+
+<!-- CALL TO ACTION Start
+    ================================================== -->
+
+	<section id="call-to-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="block">
+						<div class="block-heading">
+							<h2>Our Team Members</h2>
+						</div>
+					</div>	<!-- End of /.block -->
+					<div id="owl-example" class="owl-carousel">
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						<div> <img src="/static/images/company-1.png" alt=""></div>
+						
+					</div>	<!-- End of /.Owl-Slider -->
+				</div>	<!-- End of /.col-md-12 -->
+			</div> <!-- End Of /.Row -->
+		</div> <!-- End Of /.Container -->
+	</section>	<!-- End of Section -->
+	
+	
+
+
+{% endblock body %}
+	
