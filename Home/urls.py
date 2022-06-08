@@ -19,12 +19,7 @@ from . import views
 
 urlpatterns = [
     path('', views.Index ),
-    path('blog/', views.Blog ),
-    path('blog/1', views.Post ),
-    path('study', views.Study ),
-    path('comunity', views.Comunity ),
-    path('media', views.Media ),
-    path('team', views.Team ),
-    path('port', views.Port ),
-    path('services', views.Services ),
+    path('login', views.Login ),
+    path('registration', views.Registration ),
+   
 ]

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+
+<div class="container">
+  <center>
+    <h1 bg="blue"> Creating Your Account</h1>
+  </center>
+  <div class="mb-2">
+
+
+    <form action="/registration" method="post" novalidate>{% csrf_token %}
+       
+      <div style="position: center;  margin: auto; max-width: 70%;">
+      
+      
+        <div class="form-floating mb-3">
+          <input type="file" class="form-control" id="inputGroupFile02" name="pf" enctype="multipart/form-data"  required />
+          <label for="floatingInput">Profile Picture</label>
+        </div>      
+      
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name </label>
+        <input class="form-control" id="name" type="text" placeholder="Enter your name..." name='name'>
+      </div>
+  
+
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Phone number </label>
+        <input class="form-control" id="phone" type="tel" placeholder="8159030930" data-sb-validations="required"
+          name="phone">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="example@mail.com" data-sb-validations="required" name="email">
+        <div id="emailHelp" class="form-text">Email is your login credential</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="pwd" name="pwd">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Confrom - Password</label>
+        <input type="password" class="form-control" id="cpwd" name="cpwd">
+      </div>
+
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="accepted" name="box">
+        <label class="form-check-label" for="exampleCheck1">I accept <a href="/Terms"> Terms & Conditions</a></label>
+      </div>
+      <button type="submit" class="btn btn-primary">Registration</button>
+
+
+
+    </form>
+  </div>
+  <br><br><br><br>
+  <a href="/login">Return to Login Page</a>
+
+</div>
+</div>
+<br>
+
+
+{% endblock %}

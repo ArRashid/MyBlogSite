@@ -1,39 +1,60 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 
 from Home.models import Features
+from django.contrib.auth import authenticate, login
+
 
 # Create your views here.
 
 def Index(request):
     features = Features.objects.all()
-
     context={
-    'features':features
-    }
-    return render(request,"home-index.html",context)
-
-def Blog(request):
-    return render(request,"home-blog.html")
-
-
-def Post(request):
-    return render(request,"home-blog-post.html")
+        'features':features
+        }
+    if request.user.is_authenticated:
+        return render(request,"private/index.html",context)
+    else:
+      return render(request,"public/index.html",context)
 
 
-def Study(request):
-    return render(request,"home-study.html")
 
-def Comunity(request):
-    return render(request,"home-comunity.html")
+def Login(request):
 
-def Media(request):
-    return render(request,"home-media.html")
-def Team(request):
-    return render(request,"home-team.html")
-def Port(request):
-    return render(request,"home-port.html")
-def Services(request):
-    return render(request,"home-services.html")
+    if request.method == "POST":
+
+        email = request.POST['email']
+        password =  request.POST['password']
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            # Redirect to a success page.
+            return redirect("/")
+        else:
+            # Return an 'invalid login' error message.
+            return HttpResponse("invalide user id or pass")
+    else:
+        return render(request,"public/login.html")
 
 
+def Registration(request):
+
+    
+    if request.method == "POST":
+
+        email = request.POST['email']
+        password =  request.POST['password']
+    else:
+        return render(request,"public/registration.html")
+
+    
+   
+
+
+
+def Check_user_login_or_not(request):
+    if request.user.is_authenticated:
+    # do something if the user is authenticated
+      return HttpResponse("is user logged in")
+    else:
+      return HttpResponse("no user loged in")
 
