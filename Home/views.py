@@ -1,7 +1,8 @@
-from django.shortcuts import render,HttpResponse,redirect
 
+from django.shortcuts import render,HttpResponse,redirect
 from Home.models import Features
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
+from users.models import CustomUser
 
 
 # Create your views here.
@@ -19,9 +20,7 @@ def Index(request):
 
 
 def Login(request):
-
     if request.method == "POST":
-
         email = request.POST['email']
         password =  request.POST['password']
         user = authenticate(request, username=email, password=password)
@@ -35,14 +34,23 @@ def Login(request):
     else:
         return render(request,"public/login.html")
 
+def Logout(request):
+    logout(request)
+    return redirect("/")
 
 def Registration(request):
-
-    
     if request.method == "POST":
-
+        pfp = request.POST['pfp']
+        name = request.POST['name']
+        phone = request.POST['phone']
         email = request.POST['email']
-        password =  request.POST['password']
+        password1 = request.POST['password1']
+        password2 =  request.POST['password2']
+
+        user = CustomUser.objects.create_user(pfp=pfp,name=name,phone=phone,email=email, password=password1)
+        user.save()
+        login(request, user)
+        return redirect("/")
     else:
         return render(request,"public/registration.html")
 
