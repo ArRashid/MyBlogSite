@@ -19,5 +19,6 @@ from . import views
 
 urlpatterns = [
     path('', views.Index ),
+    path('page<int:no>', views.Pages ),
    
 ]
