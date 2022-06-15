@@ -54,8 +54,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
+					<a href='/blog'>
 					<h1>BLOG</h1>
-					<p>Latest News</p>
+					</a>
+					{%if current_category%}
+					<p><b>{{current_category}}</b></p>
+					 {% else %}
+					<p>All latest blog</p>
+					{% endif%}
 				</div>	<!-- End of /.col-md-4 -->	
 				
 			</div>	<!-- End of /.row -->
@@ -104,7 +110,7 @@
 						            		<p>3 Comments</p>
 						            	</div>
 						            </div>
-						            <p>{{post.content |truncatewords:50}}</p>
+						            <p>{{post.content |safe|truncatewords:100}}</p>
 						            <a href="post/{{post.id}}" class="btn btn-default btn-transparent pull-right" role="button">
 								        <span>Read More</span>
 								    </a>
@@ -123,19 +129,19 @@
 
 						<!-- previews button -->
 						 {% if index != 0%}
-					  	<li><a href="page{{index}}">&laquo;</a></li>
+					  	<li><a href="{{index}}">&laquo;</a></li>
 						  {% endif%}
 
 						<!-- Page no -->
 						{% for n in pages %}
 					  	<li {% if n == index %}
 						  class = 'active'
-					  	  {% endif %}><a href="page{{n|add:1}}">{{n|add:1}}<span class="sr-only"></span></a></li>
+					  	  {% endif %}><a href="{{n|add:1}}">{{n|add:1}}<span class="sr-only"></span></a></li>
 						{%endfor%}
 
 						<!-- next button -->
 						{% if index|add:1 in pages %}
-						<li><a href="page{{index|add:2}}">» </a></li>
+						<li><a href="{{index|add:2}}">» </a></li>
 						{%endif%}
 
 					</ul>	<!-- End of /.pagination -->
@@ -143,31 +149,21 @@
 
 				<div class="col-md-3">
 					<div class="blog-sidebar">
+						{% if category%}
 						<div class="block">
 							<h4>Catagories</h4>
-							<div class="list-group">
-								<a href="#" class="list-group-item">
+							<div class="list-group" >
+								{% for cat in category %}
+								<a href="category/{{cat.category}}/" class="list-group-item" >
 									<i class="fa  fa-dot-circle-o"></i>
-									Italian Foods
+									{{cat.category}}
 								</a>
-								<a href="#" class="list-group-item">
-									<i class="fa  fa-dot-circle-o"></i>
-									Traditional Food
-								</a>
-								<a href="#" class="list-group-item">
-									<i class="fa  fa-dot-circle-o"></i>
-									Indian Food
-								</a>
-								<a href="#" class="list-group-item">
-									<i class="fa  fa-dot-circle-o"></i>
-									Spanish Food
-								</a>
-								<a href="#" class="list-group-item">
-									<i class="fa  fa-dot-circle-o"></i>
-									Thai FoodN
-								</a>
+								{% endfor%}
+							
+								
 							</div>
 						</div>	<!-- End of /.block -->
+						{% endif%}
 						<div class="block">
 							<h4>Popular Posts</h4>
 							<ul class="media-list">

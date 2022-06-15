@@ -31,10 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    
+    #libs
+    'ckeditor',
+    'ckeditor_uploader',
+    #appp
     'Blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'Home.apps.HomeConfig',
+    #default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -131,7 +135,7 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'users.CustomUser'
-
+CKEDITOR_UPLOAD_PATH = "uploads/blog/editor/"
 
 
 # Default primary key field type

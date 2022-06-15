@@ -1,13 +1,44 @@
 
+from unicodedata import category
 from django.shortcuts import render ,HttpResponse
+from django.utils.translation import gettext_lazy as _
 
-from Blog.models import Posts
+from Blog.models import *
 
-#Pos configuration
- 
-posts = Posts.objects.all()             # Blog object quarry
-show = 5                                # per page blog show
-pno =range(int(posts.count()/show)+1)   # range of pages 
+
+
+# main Variables 
+allcat = Category.objects.all()
+
+
+# Main Mathods
+def get_allposts(show=5,page=1):
+    posts = Posts.objects.all().order_by('-date')             # Blog object quarry
+    pno =range(int(posts.count()/show)+1)   # range of pages 
+    index = (page -1) * show #shat showin post from here 
+    context = {
+            'posts' : posts[index:index + show],
+            'pages' : pno,
+            'index' : page - 1,
+            'category': allcat   
+        }
+    return context
+
+def get_catposts(category,show=5,page=1):
+    cat  = Category.objects.filter(category=category).values('id')    
+    posts = Posts.objects.all().filter(category=cat[0]['id']).order_by('-date')      # Blog object quarry
+    pno =range(int(posts.count()/show))   # range of pages 
+    index = (page -1) * show #shat showin post from here 
+    context = {
+            'posts' : posts[index:index + show],
+            'pages' : pno,
+            'index' : page - 1,
+            'current_category':category
+        }
+    return context
+
+
+
 
 
 # Create your views here.
@@ -15,30 +46,24 @@ def Index(request):
     if request.user.is_authenticated:
         return HttpResponse("Welcome to special Blog")
     else:  
-        context = {
-            'posts' : posts[0:0+ show],
-            'pages' : pno,
-            'index' : 0
-        }
-        return render(request,"public/blog/blog-index.html",context)
+        
 
-def Pages(request,no):
+        return render(request,"public/blog/blog-index.html",context=get_allposts())
+
+def Pages(request,pageno):
     if request.user.is_authenticated:
         return HttpResponse("Welcome to special Blog")
 
     else:
-        pageindex = no - 1 # make index from get requ
-        index  = pageindex * show # post index to show perticular posts in the pages 
+        return render(request,"public/blog/blog-index.html",context=get_allposts(page=pageno))
+
+
+
+def Category_Post(request,category,pageno=1):
+     if request.user.is_authenticated:
+        return HttpResponse("Welcome to special Blog")
+
+     else:
         
-        context = {
-            'posts' : posts[index:index + show],
-            'pages' : pno,
-            'index' : pageindex
-            
-        }
-        return render(request,"public/blog/blog-index.html",context)
-
-
-    
-
+        return render(request,"public/blog/blog-index.html",context=get_catposts(category,page=pageno))
 

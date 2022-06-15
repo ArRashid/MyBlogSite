@@ -19,6 +19,8 @@ from . import views
 
 urlpatterns = [
     path('', views.Index ),
-    path('page<int:no>', views.Pages ),
+    path('<int:pageno>', views.Pages ),
+    path('category/<str:category>/<int:pageno>', views.Category_Post ),
+    path('category/<str:category>/', views.Category_Post ),
    
 ]

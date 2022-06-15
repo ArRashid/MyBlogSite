@@ -1,8 +1,14 @@
-from email.mime import image
 from django.db import models
 from taggit.managers import TaggableManager
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
+class Category(models.Model):
+    id = models.AutoField(primary_key=True)
+    category = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.category
 
 class Posts(models.Model):
     id = models.AutoField(primary_key=True)
@@ -11,8 +17,8 @@ class Posts(models.Model):
     author = models.CharField(max_length=100)
     date = models.DateField()
     tages = TaggableManager()
-    category = models.CharField(max_length=25)
-    content = models.TextField()
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    content = RichTextUploadingField()
 
     def __str__(self):
         return self.title
