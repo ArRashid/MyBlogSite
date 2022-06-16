@@ -1,9 +1,10 @@
 
-from unicodedata import category
-from django.shortcuts import render ,HttpResponse
+import imp
+from django.shortcuts import redirect, render ,HttpResponse
 from django.utils.translation import gettext_lazy as _
 
 from Blog.models import *
+from datetime import date
 
 
 
@@ -40,6 +41,12 @@ def get_catposts(category,show=5,page=1):
 
 
 
+def get_post(postid):
+    pass
+
+
+
+
 
 # Create your views here.
 def Index(request):
@@ -67,3 +74,27 @@ def Category_Post(request,category,pageno=1):
         
         return render(request,"public/blog/blog-index.html",context=get_catposts(category,page=pageno))
 
+
+def Post(request,postno):
+    post = Posts.objects.filter(id=postno)
+    if  request.method == 'GET':
+        
+        comments = Comments.objects.all().order_by('date','id').filter(postid=postno)
+        context = {
+        'post': post[0],
+        'comments':comments,
+        'category': allcat
+            }
+          
+        return render(request,"public/blog/blog-post.html",context)
+    else:
+        name = request.POST['name']
+        email = request.POST['email']
+        comment = request.POST['comment']
+
+        newcomment = Comments(name=name,email=email,comment=comment,postid=post[0],date=date.today())
+        newcomment.save()
+        return redirect('/blog/post/{0}'.format(postno))
+
+
+    

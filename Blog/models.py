@@ -24,3 +24,14 @@ class Posts(models.Model):
         return self.title
 
 
+class Comments(models.Model):
+    id = models.AutoField(primary_key=True)
+    postid = models.ForeignKey(Posts,on_delete=models.CASCADE)
+    date = models.DateField()
+    name = models.CharField(max_length=100)
+    email = models.EmailField(default='no@email.exist')
+    comment = models.TextField()
+    
+
+
+
