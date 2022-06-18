@@ -4,12 +4,17 @@ from django.shortcuts import redirect, render ,HttpResponse
 from django.utils.translation import gettext_lazy as _
 
 from Blog.models import *
+from taggit.models import Tag,TaggedItem
 from datetime import date
 
 
 
 # main Variables 
 allcat = Category.objects.all()
+alltag = Tag.objects.all().order_by('-id')[:5]
+promtpost = Posts.objects.order_by('-id')[:3]
+
+
 
 
 # Main Mathods
@@ -21,7 +26,9 @@ def get_allposts(show=5,page=1):
             'posts' : posts[index:index + show],
             'pages' : pno,
             'index' : page - 1,
-            'category': allcat   
+            'category': allcat ,
+            'tags': alltag ,
+            'pposts':promtpost
         }
     return context
 
@@ -34,15 +41,30 @@ def get_catposts(category,show=5,page=1):
             'posts' : posts[index:index + show],
             'pages' : pno,
             'index' : page - 1,
-            'current_category':category
+            'current_category':category,
+            'tags': alltag ,
+            'pposts':promtpost
         }
     return context
 
 
 
 
-def get_post(postid):
-    pass
+def get_tagposts(tag,show=5,page=1):
+    tagid = Tag.objects.all().filter(name=tag).values('id')   
+    pid = TaggedItem.objects.filter(tag_id=tagid[0]['id']).values('object_id')
+    posts = Posts.objects.filter(id__in=pid)# Blog object quarry
+    pno =range(int(posts.count()/show))   # range of pages 
+    index = (page -1) * show #shat showin post from here 
+    context = {
+            'posts' : posts[index:index + show],
+            'pages' : pno,
+            'index' : page - 1,
+            'category': allcat ,
+            'tags': alltag ,
+            'pposts':promtpost
+        }
+    return context
 
 
 
@@ -83,7 +105,9 @@ def Post(request,postno):
         context = {
         'post': post[0],
         'comments':comments,
-        'category': allcat
+        'category': allcat,
+        'tags':alltag,
+        'pposts':promtpost
             }
           
         return render(request,"public/blog/blog-post.html",context)
@@ -97,4 +121,12 @@ def Post(request,postno):
         return redirect('/blog/post/{0}'.format(postno))
 
 
+def Tag_Post(request,tag,pageno=1):
+
+    if request.user.is_authenticated:
+        return HttpResponse("Welcome to special Blog")
+
+    else:
+        return render(request,"public/blog/blog-index.html",context=get_tagposts(tag=tag,page=pageno))
+    
     

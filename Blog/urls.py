@@ -23,5 +23,7 @@ urlpatterns = [
     path('category/<str:category>/<int:pageno>', views.Category_Post ),
     path('category/<str:category>/', views.Category_Post ),
     path('post/<int:postno>', views.Post ),
+    path('tag/<str:tag>/', views.Tag_Post ),
+    path('tag/<str:tag>/<int:pageno>', views.Tag_Post ),
    
 ]

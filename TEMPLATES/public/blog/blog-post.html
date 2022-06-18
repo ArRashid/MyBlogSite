@@ -55,13 +55,6 @@
 					<h1>POST</h1>
 					<p>{{post.title}}</p>
 				</div>	<!-- End of /.col-md-4 -->
-				<div class="col-md-8 hidden-xs">
-					<ol class="breadcrumb pull-right">
-					  	<li><a href="#">Home</a></li>
-					  	<li><a href="#">Blog</a></li>
-					  	<li class="active">Single Post</li>
-					</ol>
-				</div>	<!-- End of /.col-md-8 -->
 			</div>	<!-- End of /.row -->
 		</div>	<!-- End of /.container -->
 	</section>	<!-- End of /#Topic-header -->
@@ -98,7 +91,7 @@
 						            	</div>
 						            	<div class="block">
 						            		<i class="fa fa-comments"></i>
-						            		<p>3 Comments</p>
+						            		<p>{{comments.count}} Comments</p>
 						            	</div>
 						            </div>
 						            {{post.content | safe}}
@@ -197,56 +190,42 @@
 							</div>
 						</div>	<!-- End of /.block -->
 						{% endif%}
+
+						{% if pposts%}
 						<div class="block">
-							<h4>Popular Posts</h4>
+							<h4>Latest Posts</h4>
 							<ul class="media-list">
+								{% for post in pposts%}
 							 	<li class="media">
 							    	<a class="pull-left" href="#">
-							      		<img class="media-object" src="/static/images/post-img.png" alt="...">
+										{%if post.cover%}
+							      		<img class="media-object" src="/media/{{post.cover}}" alt="{{post.title}}">
+										{% else%}
+										<img class="media-object" src="/static/assets/png/default-post.png" alt="arrashid">
+										{%endif%}
 							    	</a>
 							    	<div class="media-body">
-							      		<a href="" class="media-heading">
-							      			Lorem ipsum dolor</a>
-							    	  	<p>January 10,2014</p>
+							      		<a href="/blog/post/{{post.id}}" class="media-heading">
+							      			{{post.title}}</a>
+							    	  	<p>{{post.date}}</p>
 							    	</div>
-							  	</li>
-							  	<li class="media">
-							    	<a class="pull-left" href="#">
-							      		<img class="media-object" src="/static/images/post-img-2.png" alt="...">
-							    	</a>
-							    	<div class="media-body">
-							      		<a href="" class="media-heading">
-							      			Mauris blandit aliquet</a>
-							    	  	<p>January 10,2014</p>
-							    	</div>
-							  	</li>
-							  	<li class="media">
-							    	<a class="pull-left" href="#">
-							      		<img class="media-object" src="/static/images/post-img-3.png" alt="...">
-							    	</a>
-							    	<div class="media-body">
-							      		<a href="" class="media-heading">
-							      			Quisque velit nisi</a>
-							    	  	<p>January 10,2014</p>
-							    	</div>
-							  	</li>
-							  </ul>
+							  	</li>	<!-- End of /.media -->
+								{%endfor%}
+							</ul>	<!-- End of /.media-list -->
 						</div>	<!-- End of /.block -->
+						{% endif%}
 
+
+						{% if tags%}
 						<div class="block">
 							<h4>Tag Cloud</h4>
 							<div class="tag-link">
-								<a href="">BALLET</a>
-								<a href="">BLOG</a>
-								<a href="">CHRISTMAS</a>
-								<a href="">ELEGANCE</a>
-								<a href="">ELEGANT</a>
-								<a href="">SHOPPING</a>
-								<a href="">SHOP</a>
-								<a href="">PHOTOGRAPHY</a>
+								{% for tag in tags %}
+								<a href="/blog/tag/{{tag.name}}">{{tag.name}}</a>
+							{% endfor%}
 							</div>	
 						</div>	<!-- End of /.block -->
-						
+						{% endif%}
 					</div>	<!-- End of /.Sidebar -->
 				</div>	<!-- End of /.col-md-3 -->
 			</div>	<!-- End of /.row -->
