@@ -1,0 +1,56 @@
+<!-- 
+
+	list variable used in this tamplate 
+
+
+	menuapps = list aditional app needed to show the user 
+	activeapp = wich app is active 
+
+	
+ -->
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			</div> <!-- End of /.navbar-header -->
+	
+	
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				  <ul class="nav navbar-nav nav-main">
+					<li{% if activeapp == 'HOME' %} class='active' {%endif%}><a href="/">HOME</a></li>
+					<li{% if activeapp == 'BLOG' %} class='active' {%endif%}><a href="/blog">BLOG</a></li>
+					<li{% if activeapp == 'COMUNITY' %} class='active' {%endif%}><a href="/comunity">COMUNITY</a></li>
+
+					{% if request.user.is_authenticated%}
+
+					{%for app in menuapps %}
+					<li{% if activeapp == app.title %}class='active' {%endif%}><a href="{{app.link}}">{{app.title}}</a></li>
+					{%endfor%}
+
+
+					<li {% if activeapp == 'DASHBOARD' %} class='active' {%endif%}><a href="/dashboard">DASHBOARD</a></li>
+					{%else%}
+					<li><a href="/port">MY SELF</a></li>
+					{% if services%}
+					<li class="dropdown">
+						<a href="/services">
+							SERVICES
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							{% for service in services%}
+						   <li><a  href="/service/{{service.name}}">{{service.name}}</a></li>
+						   {% endfor%}
+						</ul>
+					</li> <!-- End of /.dropdown -->
+					{%endif%}
+					{% endif%}
+				</ul> <!-- End of /.nav-main -->
+			</div>	<!-- /.navbar-collapse -->
+		</div>	<!-- /.container-fluid -->
+	</nav>	<!-- End of /.nav -->

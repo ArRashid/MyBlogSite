@@ -10,7 +10,8 @@ from users.models import CustomUser
 def Index(request):
     features = Features.objects.all()
     context={
-        'features':features
+        'features':features,
+        'activeapp':'HOME'
         }
     if request.user.is_authenticated:
         return render(request,"private/index.html",context)

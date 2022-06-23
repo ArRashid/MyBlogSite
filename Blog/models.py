@@ -16,9 +16,11 @@ class Posts(models.Model):
     cover = models.ImageField(upload_to="uploads/blog/posts",blank=True,null=True)
     author = models.CharField(max_length=100)
     date = models.DateField()
-    tages = TaggableManager()
+    mdate = models.DateField(null=True,blank=True)
+    tags = TaggableManager()
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     content = RichTextUploadingField()
+    is_publish = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title

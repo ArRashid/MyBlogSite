@@ -14,3 +14,9 @@ class Features(models.Model):
     details = models.CharField(max_length=100)
     link = models.CharField(max_length=100,default="www.google.com")
     icon = models.ImageField(upload_to="uploads/icons/features",blank=True,null=True)
+
+
+class AppsMenu(models.Model):
+    title = models.CharField(max_length=10)
+    link = models.CharField(max_length=100)
+    is_active = models.BooleanField()

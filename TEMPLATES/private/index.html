@@ -1,47 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
-	<!-- MENU Start ================================================== -->
-
-	<nav class="navbar navbar-default">
-		<div class="container">
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		    </div> <!-- End of /.navbar-header -->
-
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      	<ul class="nav navbar-nav nav-main">
-		        	<li class="active"><a href="/">HOME</a></li>
-					<li><a href="/blog">BLOG</a></li>
-					<li><a href="/study">STUDY</a></li>
-					<li><a href="/comunity">COMUNITY</a></li>
-					<li><a href="/media">MEDIA</a></li>
-					<li><a href="">TEAM</a></li>
-					<li><a href="#">PORTFOLIO</a></li>
-					<li class="dropdown">
-						<a href="#">
-							SERVICES
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-						   <li><a  href="#">We Can Build Your Web Site</a></li>
-						    <li><a  href="#">We Can Build Your Softwere</a></li>
-						    <li><a  href="#">We Can Management Assets</a></li>
-						    <li><a  href="#">Other Services</a></li>
-						</ul>
-					</li> <!-- End of /.dropdown -->
-
-					
-		        </ul> <!-- End of /.nav-main -->
-		    </div>	<!-- /.navbar-collapse -->
-		</div>	<!-- /.container-fluid -->
-	</nav>	<!-- End of /.nav -->
+	
 
 
+{% include 'appsmenu.html' %} 
 	<!-- SLIDER Start
     ================================================== -->
 

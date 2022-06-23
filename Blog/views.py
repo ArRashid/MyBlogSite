@@ -28,7 +28,8 @@ def get_allposts(show=5,page=1):
             'index' : page - 1,
             'category': allcat ,
             'tags': alltag ,
-            'pposts':promtpost
+            'pposts':promtpost,
+            'activeapp':'BLOG'
         }
     return context
 
@@ -43,7 +44,8 @@ def get_catposts(category,show=5,page=1):
             'index' : page - 1,
             'current_category':category,
             'tags': alltag ,
-            'pposts':promtpost
+            'pposts':promtpost,
+            'activeapp':'BLOG'
         }
     return context
 
@@ -62,7 +64,8 @@ def get_tagposts(tag,show=5,page=1):
             'index' : page - 1,
             'category': allcat ,
             'tags': alltag ,
-            'pposts':promtpost
+            'pposts':promtpost,
+            'activeapp':'BLOG'
         }
     return context
 
@@ -73,7 +76,7 @@ def get_tagposts(tag,show=5,page=1):
 # Create your views here.
 def Index(request):
     if request.user.is_authenticated:
-        return HttpResponse("Welcome to special Blog")
+        return render(request,"private/blog/blog-index.html",context=get_allposts())
     else:  
         
 
@@ -107,7 +110,8 @@ def Post(request,postno):
         'comments':comments,
         'category': allcat,
         'tags':alltag,
-        'pposts':promtpost
+        'pposts':promtpost,
+        'activeapp':'BLOG'
             }
           
         return render(request,"public/blog/blog-post.html",context)

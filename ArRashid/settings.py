@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     #appp
+    'Dashboard.apps.DashboardConfig',
     'Blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'Home.apps.HomeConfig',
