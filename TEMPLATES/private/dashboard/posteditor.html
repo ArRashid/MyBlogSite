@@ -1,12 +1,12 @@
 {% extends 'dashboard-base.html' %}
 {% block body %}
 
-<div style="padding-right: 150px;">
+
 
 <form action = "" method = "post" enctype="multipart/form-data">{% csrf_token %}
 	{{ CreatePost.media }}
 	{{ CreatePost.as_ul }}
 	<input class='btn-primary' value="update" type="submit"/>
 </form>
-</div>	
+
 {% endblock body %}

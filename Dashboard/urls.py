@@ -21,5 +21,9 @@ urlpatterns = [
     path('', views.Index ),
     path('addpost', views.AddPost ),
     path('editepost', views.EditePost ),
-     path('editepost/<int:postid>', views.PostEditor )
+    path('editepost/<int:postid>', views.PostEditor ),
+    path('editepost/delete/<int:postid>', views.DeletePost ),
+    path('editepost/unpublish/<int:postid>', views.UnpublishPost ),
+    path('editepost/publish/<int:postid>', views.PublishPost )
+
 ]

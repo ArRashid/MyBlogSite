@@ -43,6 +43,13 @@
 							<td>{{post.category}}</td>
 							<td>{{post.date}}</td>
 							<td><button type="button" class="btn btn-primary btn-circle btn-sm" onclick="window.location.href='/dashboard/editepost/{{post.id}}'">Edite This Post</button></td>
+							{% if post.is_published %}
+							<td><button type="button" class="btn btn-warning btn-circle btn-sm" onclick="window.location.href='/dashboard/editepost/unpublish/{{post.id}}'">Unpublish This Post</button></td>
+							{% else%}
+							<td><button type="button" class="btn btn-success btn-circle btn-sm" onclick="window.location.href='/dashboard/editepost/publish/{{post.id}}'">Publish This Post</button></td>
+							{% endif %}
+							<td><button type="button" class="btn  btn-danger btn-circle btn-sm" onclick="window.location.href='/dashboard/editepost/delete/{{post.id}}'">Delete This Post</button></td>
+						
 						</tr>
 						{% endfor%}
 						

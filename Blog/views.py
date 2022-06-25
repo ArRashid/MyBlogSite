@@ -12,14 +12,14 @@ from datetime import date
 # main Variables 
 allcat = Category.objects.all()
 alltag = Tag.objects.all().order_by('-id')[:5]
-promtpost = Posts.objects.order_by('-id')[:3]
+promtpost = Posts.objects.all().filter(is_published=True).order_by('-id')[:3]
 
 
 
 
 # Main Mathods
 def get_allposts(show=5,page=1):
-    posts = Posts.objects.all().order_by('-date')             # Blog object quarry
+    posts = Posts.objects.all().filter(is_published=True).order_by('-date')             # Blog object quarry
     pno =range(int(posts.count()/show)+1)   # range of pages 
     index = (page -1) * show #shat showin post from here 
     context = {
@@ -35,7 +35,7 @@ def get_allposts(show=5,page=1):
 
 def get_catposts(category,show=5,page=1):
     cat  = Category.objects.filter(category=category).values('id')    
-    posts = Posts.objects.all().filter(category=cat[0]['id']).order_by('-date')      # Blog object quarry
+    posts = Posts.objects.all().filter(category=cat[0]['id'],is_published=True).order_by('-date')    # Blog object quarry
     pno =range(int(posts.count()/show))   # range of pages 
     index = (page -1) * show #shat showin post from here 
     context = {
@@ -78,14 +78,11 @@ def Index(request):
     if request.user.is_authenticated:
         return render(request,"private/blog/blog-index.html",context=get_allposts())
     else:  
-        
-
         return render(request,"public/blog/blog-index.html",context=get_allposts())
 
 def Pages(request,pageno):
     if request.user.is_authenticated:
-        return HttpResponse("Welcome to special Blog")
-
+         return render(request,"private/blog/blog-index.html",context=get_allposts(page=pageno))
     else:
         return render(request,"public/blog/blog-index.html",context=get_allposts(page=pageno))
 
@@ -93,7 +90,7 @@ def Pages(request,pageno):
 
 def Category_Post(request,category,pageno=1):
      if request.user.is_authenticated:
-        return HttpResponse("Welcome to special Blog")
+        return render(request,"private/blog/blog-index.html",context=get_catposts(category,page=pageno))
 
      else:
         
@@ -102,27 +99,63 @@ def Category_Post(request,category,pageno=1):
 
 def Post(request,postno):
     post = Posts.objects.filter(id=postno)
-    if  request.method == 'GET':
-        
-        comments = Comments.objects.all().order_by('date','id').filter(postid=postno)
-        context = {
-        'post': post[0],
-        'comments':comments,
-        'category': allcat,
-        'tags':alltag,
-        'pposts':promtpost,
-        'activeapp':'BLOG'
-            }
-          
-        return render(request,"public/blog/blog-post.html",context)
-    else:
-        name = request.POST['name']
-        email = request.POST['email']
-        comment = request.POST['comment']
 
-        newcomment = Comments(name=name,email=email,comment=comment,postid=post[0],date=date.today())
-        newcomment.save()
-        return redirect('/blog/post/{0}'.format(postno))
+    if request.user.is_authenticated:
+        if  request.method == 'GET':
+            comments = Comments.objects.all().order_by('date','id').filter(postid=postno)
+            context = {
+            'post': post[0],
+            'comments':comments,
+            'category': allcat,
+            'tags':alltag,
+            'pposts':promtpost,
+            'activeapp':'BLOG'
+                }
+            return render(request,"private/blog/blog-post.html",context)
+        else:
+            name = request.user.name
+            email = request.user.email
+            comment = request.POST['comment']
+            
+               
+
+
+            if post[0].author == request.user :
+                newcomment = Comments(name=name,email=email,comment=comment,postid=post[0],date=date.today(),is_author=True)
+                newcomment.save()
+            else:
+                newcomment = Comments(name=name,email=email,comment=comment,postid=post[0],date=date.today())
+                newcomment.save()
+
+            
+            return redirect('/blog/post/{0}'.format(postno))
+        
+
+    else:
+        if  request.method == 'GET':
+            comments = Comments.objects.all().order_by('date','id').filter(postid=postno)
+            context = {
+            'post': post[0],
+            'comments':comments,
+            'category': allcat,
+            'tags':alltag,
+            'pposts':promtpost,
+            'activeapp':'BLOG'
+                }
+            return render(request,"public/blog/blog-post.html",context)
+        else:
+            name = request.POST['name']
+            email = request.POST['email']
+            comment = request.POST['comment']
+            newcomment = Comments(name=name,email=email,comment=comment,postid=post[0],date=date.today())
+            newcomment.save()
+            return redirect('/blog/post/{0}'.format(postno))
+           
+    
+    
+       
+        
+    
 
 
 def Tag_Post(request,tag,pageno=1):
