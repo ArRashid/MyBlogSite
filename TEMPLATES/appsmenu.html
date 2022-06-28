@@ -24,6 +24,7 @@
 				  <ul class="nav navbar-nav nav-main">
 					<li{% if activeapp == 'HOME' %} class='active' {%endif%}><a href="/">HOME</a></li>
 					<li{% if activeapp == 'BLOG' %} class='active' {%endif%}><a href="/blog">BLOG</a></li>
+					<li{% if activeapp == 'REVIEWS' %} class='active' {%endif%}><a href="/reviews">REVIEWS</a></li>
 					<li{% if activeapp == 'COMUNITY' %} class='active' {%endif%}><a href="/comunity">COMUNITY</a></li>
 
 					{% if request.user.is_authenticated%}
