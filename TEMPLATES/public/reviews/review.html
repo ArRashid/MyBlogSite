@@ -13,88 +13,128 @@
     }
     img {
         border: 5px solid #55A;
-        border-style
+        border-style:
       
       }
     </style>
 
 {% include 'appsmenu.html' %}  
-<table style="border-collapse: collapse; width: 100.39%; height: 43px;" border="3">
+<table style="border-collapse: collapse; background-color:rgb(51, 204, 0);color: blue; width: 100%; height: 43px;" border="3">
 <tbody>
 <tr>
-<td style="width: 100%;">
-<h1>Product Title</h1>
+<td style="width: 100%;  text-align:center;">
+<h1>{{review.title}}</h1>
 </td>
 </tr>
 </tbody>
 </table>
-
+{% if product.cover%}
 <div >
 <p>&nbsp;</p>
-<p><img  class="Center" src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg" width="921" height="320"/></p>
+<p><img  class="Center" src="/media/{{product.cover}}" width="921" height="320"/></p>
 </div>
+{%endif%}%
 
-
-<hr />
-<p style="text-align: center;">Product Rating : *****</p>
-<p style="text-align: center;">Revews Rating : *****</p>
-<hr />
-<div style="background-color: red; color: blue;">
+<div style="background-color: rgb(71, 209, 71);  height: 43px;" border="2">
 <h3 style="text-align: center; class="bg-primary">Specification</h3>
 </div>
 <hr />
-<p style="text-align: left;">Pruduct : NameOf the Product&nbsp;</p>
-<p style="text-align: left;">Type : Product Type</p>
-<p style="text-align: left;">Brand : Brand Of the Product</p>
-<p style="text-align: left;">Others Details :&nbsp;</p>
+{% if product%}
+<p style=" text-align: center;"><b>Pruduct :</b> {{product.name}}
+    &nbsp;&nbsp;&nbsp;
+<b>Category :</b> {{product.category}}
+&nbsp;&nbsp;&nbsp;
+<b>Brand :</b> {{product.brand}}
+&nbsp;&nbsp;&nbsp;
+<b>Price :</b> {{product.price}}</p>
 <hr />
-<table style="border-collapse: collapse; width: 100.611%; height: 115px;" border="1">
+{% endif %}
+{%if review%}
+<hr />
+
+
+{{review.spec | safe}}
+
+{% endif %}
+
+{%if review.pros or review.cons%}
+<div style="background-color: rgb(112, 219, 112); color: blue;">
+    <h3 style="text-align: center; class="bg-primary">advantage Vs disadvantage</h3>
+    </div>
+
+<table style="border-collapse:display: block;
+margin-left: auto;
+margin-right: auto; collapse; width: 90%; height: 115px;" border="3">
 <tbody>
 <tr style="height: 10px;">
-<td style="width: 50%; height: 10px; text-align: center;"><strong>&nbsp;Advanatages</strong></td>
-<td style="width: 50%; height: 10px; text-align: center;"><strong>Dis advantages</strong></td>
+<td style="width: 50%; height: 10px; text-align: center;"><strong>&nbsp;Procs</strong></td>
+<td style="width: 50%; height: 10px; text-align: center;"><strong>Cons</strong></td>
 </tr>
 <tr style="height: 105px;">
-<td style="width: 50%; height: 105px;">
-<ol>
-<li>Best Procust in Low Prise</li>
-<li>Low cos&nbsp;</li>
-<li>Value for Money&nbsp;</li>
-<li>Shareable</li>
-<li>10 yr waranty&nbsp;</li>
-<li>&nbsp;</li>
-</ol>
+<td style="width: 50%; height: 105px; text-align: center; color:green;">
+   
+    <b>{{review.pros|linebreaksbr}}</b>
 </td>
-<td style="width: 50%; height: 105px;">
-<ol>
-<li>No replsment '</li>
-<li>Normal glass</li>
-<li>Camera 10 mp</li>
-<li>Battry 10 mhs</li>
-</ol>
+<td style="width: 50%; height: 105px; text-align: center; color: red ; ">
+    <b>{{review.cons|linebreaksbr}}</b>
 <p>&nbsp;</p>
 </td>
 </tr>
 </tbody>
 </table>
+{% endif %}
 <hr />
-<h3 style="text-align: center;">Analogy</h3>
+
+
+
+
+<div style="background-color:rgb(133, 224, 133); color: blue;">
+    <h3 style="text-align: center;">Analogy</h3>
+    </div>
+
+
+
+    <hr />
+
+    <p style="text-align: center;">Product Rating : *****</p>
+    <p style="text-align: center;">Revews Rating : *****</p>
+    
+    <hr />
 <hr />
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <hr />
+
+
+
+<div style="background-color:rgb(154, 229, 154); color: blue;">
 <h3 style="text-align: center;">Best Buy Link</h3>
+</div>
+
+
 <hr />
 <p><a href="http://www.amazone.com" target="_blank">amazone</a> &nbsp;</p>
 <p>&nbsp;</p>
 <hr />
+
+
+
+<div style="background-color:rgb(174, 234, 174); color: blue;">
 <h3 style="text-align: center;">Videos Review Links</h3>
+</div>
+
+
 <hr />
 <p>&nbsp;</p>
 <p><iframe src="//www.youtube.com/embed/tgbNymZ7vqY" width="420" height="315"></iframe></p>
 <p>&nbsp;</p>
 <hr />
+
+
+
+<div style="background-color:rgb(194, 239, 194); color: blue;">
 <h3 style="text-align: center;">Similer Pruducts</h3>
+</div>
 <hr />
 <h3>&nbsp;</h3>
 

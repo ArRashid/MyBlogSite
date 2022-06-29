@@ -18,8 +18,8 @@ class Category(models.Model):
 class Product(models.Model):
     pid = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    cover = models.ImageField(upload_to="uploads/reviews/product",blank=True,null=True)
     name = models.CharField(max_length=200)
+    cover = models.ImageField(upload_to="uploads/reviews/products",blank=True,null=True)
     brand = models.CharField(max_length=200)
     price = models.IntegerField()
     def __str__(self):
