@@ -1,52 +1,100 @@
-
 {% extends 'base.html' %}
 {% block body %}
-	
 
+{%load funsation%}
 
 <style>
-    .Center{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-    }
-    img {
-        border: 5px solid #55A;
-        border-style:
-      
-      }
-    </style>
+  .Center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
 
-{% include 'appsmenu.html' %}  
-<table style="border-collapse: collapse; background-color:rgb(51, 204, 0);color: blue; width: 100%; height: 43px;" border="3">
-<tbody>
-<tr>
-<td style="width: 100%;  text-align:center;">
-<h1>{{review.title}}</h1>
-</td>
-</tr>
-</tbody>
+
+
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .rate {
+    float: left;
+    height: auto;
+    margin: 10px 10px;
+    padding: 10px 10px;
+  }
+
+  .rate:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
+  }
+
+  .rate:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+  }
+
+  .rate:not(:checked)>label:before {
+    content: '★ ';
+  }
+
+  .rate>input:checked~label {
+    color: #ffc700;
+  }
+
+  .rate:not(:checked)>label:hover,
+  .rate:not(:checked)>label:hover~label {
+    color: #deb217;
+  }
+
+  .rate>input:checked+label:hover,
+  .rate>input:checked+label:hover~label,
+  .rate>input:checked~label:hover,
+  .rate>input:checked~label:hover~label,
+  .rate>label:hover~input:checked~label {
+    color: #c59b08;
+  }
+</style>
+
+{% include 'appsmenu.html' %}
+<table style="border-collapse: collapse; background-image: linear-gradient(120deg, #54f315 0%, #fd168a 100%);
+background-repeat: no-repeat;color: blue; width: 100%; height: 43px;"
+  border="3">
+  <tbody>
+    <tr>
+      <td style="width: 100%;  text-align:center;">
+        <h1>{{review.title}}</h1>
+      </td>
+    </tr>
+  </tbody>
 </table>
 {% if product.cover%}
-<div >
-<p>&nbsp;</p>
-<p><img  class="Center" src="/media/{{product.cover}}" width="921" height="320"/></p>
+<div>
+  <p>&nbsp;</p>
+  <p><img style="border: 5px solid rgb(255, 8, 0); border-style:" class="Center" src="/media/{{product.cover}}" width="921" height="320" /></p>
 </div>
 {%endif%}%
 
-<div style="background-color: rgb(71, 209, 71);  height: 43px;" border="2">
-<h3 style="text-align: center; class="bg-primary">Specification</h3>
+<div style="background-color: rgb(71, 209, 71);  height: 43px;height:70px" border="2">
+  <h3 style="text-align: center; class=" bg-primary">Specification</h3>
 </div>
 <hr />
 {% if product%}
 <p style=" text-align: center;"><b>Pruduct :</b> {{product.name}}
-    &nbsp;&nbsp;&nbsp;
-<b>Category :</b> {{product.category}}
-&nbsp;&nbsp;&nbsp;
-<b>Brand :</b> {{product.brand}}
-&nbsp;&nbsp;&nbsp;
-<b>Price :</b> {{product.price}}</p>
+  &nbsp;&nbsp;&nbsp;
+  <b>Category :</b> {{product.category}}
+  &nbsp;&nbsp;&nbsp;
+  <b>Brand :</b> {{product.brand}}
+  &nbsp;&nbsp;&nbsp;
+  <b>Price :</b> {{product.price}}
+</p>
 <hr />
 {% endif %}
 {%if review%}
@@ -58,29 +106,29 @@
 {% endif %}
 
 {%if review.pros or review.cons%}
-<div style="background-color: rgb(112, 219, 112); color: blue;">
-    <h3 style="text-align: center; class="bg-primary">advantage Vs disadvantage</h3>
-    </div>
+<div style="background-color: rgb(112, 219, 112); color: blue;height:60px">
+  <h3 style="text-align: center; class=" bg-primary">advantage Vs disadvantage</h3>
+</div>
 
 <table style="border-collapse:display: block;
 margin-left: auto;
 margin-right: auto; collapse; width: 90%; height: 115px;" border="3">
-<tbody>
-<tr style="height: 10px;">
-<td style="width: 50%; height: 10px; text-align: center;"><strong>&nbsp;Procs</strong></td>
-<td style="width: 50%; height: 10px; text-align: center;"><strong>Cons</strong></td>
-</tr>
-<tr style="height: 105px;">
-<td style="width: 50%; height: 105px; text-align: center; color:green;">
-   
-    <b>{{review.pros|linebreaksbr}}</b>
-</td>
-<td style="width: 50%; height: 105px; text-align: center; color: red ; ">
-    <b>{{review.cons|linebreaksbr}}</b>
-<p>&nbsp;</p>
-</td>
-</tr>
-</tbody>
+  <tbody>
+    <tr style="height: 10px;">
+      <td style="width: 50%; height: 10px; text-align: center;"><strong>&nbsp;Procs</strong></td>
+      <td style="width: 50%; height: 10px; text-align: center;"><strong>Cons</strong></td>
+    </tr>
+    <tr style="height: 105px;">
+      <td style="width: 50%; height: 105px; text-align: center; color:green;">
+
+        <b>{{review.pros|linebreaksbr}}</b>
+      </td>
+      <td style="width: 50%; height: 105px; text-align: center; color: red ; ">
+        <b>{{review.cons|linebreaksbr}}</b>
+        <p>&nbsp;</p>
+      </td>
+    </tr>
+  </tbody>
 </table>
 {% endif %}
 <hr />
@@ -88,39 +136,200 @@ margin-right: auto; collapse; width: 90%; height: 115px;" border="3">
 
 
 
-<div style="background-color:rgb(133, 224, 133); color: blue;">
-    <h3 style="text-align: center;">Analogy</h3>
-    </div>
-
-
-
-    <hr />
-
-    <p style="text-align: center;">Product Rating : *****</p>
-    <p style="text-align: center;">Revews Rating : *****</p>
-    
-    <hr />
-<hr />
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<hr />
-
-
-
-<div style="background-color:rgb(154, 229, 154); color: blue;">
-<h3 style="text-align: center;">Best Buy Link</h3>
+<div style="background-color:rgb(133, 224, 133); color: blue; height:50px">
+  <h3 style="text-align: center; ">Ratings</h3>
 </div>
 
 
-<hr />
-<p><a href="http://www.amazone.com" target="_blank">amazone</a> &nbsp;</p>
-<p>&nbsp;</p>
+<!-- This is for get all ratig for the product-->
+<div
+  style="background-image: linear-gradient(120deg, #e1f7cb 0%, #ebedee 100%);
+background-repeat: no-repeat;height:auto;color: #555555; display: flex; align-items: center; justify-content: center; background-color:red;">
+  {% for rate in rating %}
+  <div class="rate" style="text-align: center;border-radius: 10px;
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.856); ">
+    <h1>{{rate.site}}</h1>
+    {% with ''|center:rate.max_rate as range %}
+
+    {% for _ in range %}
+    <label {% if not forloop.counter <= rate.max_rate|sub:rate.rate%}
+      style="color: #c59b08" {% endif%}>{{forloop.counter}} stars</label>
+    {% endfor%}
+    {% endwith %}
+  </div>
+  {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% if analogy %}
+<div style="background-color:rgb(133, 224, 133); color: blue;height:50px">
+  <h3 style="text-align: center;">Analogy</h3>
+</div>
+
+<div style="display: flex; align-items: center; font-family: 'Montserrat', sans-sherif;
+background-image: linear-gradient(120deg, #3dd600ad 0%, #e6529cab 100%);
+background-repeat: no-repeat;height: auto;color: #555555;overflow: hidden;justify-content: center;flex-wrap: wrap">
+  <style>
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background-color: #E1DFD1;
+      margin: 20px 20px;
+      width: 280px;
+      height: 330px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
+    }
+
+    .card .percent {
+      position: relative;
+    }
+
+    .card svg {
+      position: relative;
+      width: 210px;
+      height: 210px;
+      transform: rotate(-90deg);
+    }
+
+    .card svg circle {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: #f0f0f0;
+      stroke-width: 10;
+      stroke-linecap: round;
+    }
+
+    .card svg circle:last-of-type {
+      stroke-dasharray: 625px;
+      stroke-dashoffset: calc(625px - (625px * var(--percent)) / 100);
+      stroke: #3498db;
+    }
+
+    .card .number {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .card .number h3 {
+      font-weight: 200;
+      font-size: 3.5rem;
+    }
+
+    .card .number h3 span {
+      font-size: 2rem;
+    }
+
+    .card .title h2 {
+      margin: 25px 0 0;
+    }
+
+    .card:nth-child(1) svg circle:last-of-type {
+      stroke: #f39c12;
+    }
+
+    .card:nth-child(2) svg circle:last-of-type {
+      stroke: #2e4bcc;
+    }
+    .card:nth-child(3) svg circle:last-of-type {
+      stroke: #2ecc71;
+    }
+    .card:nth-child(4) svg circle:last-of-type {
+      stroke: #f300d3;
+    }
+    .card:nth-child(5) svg circle:last-of-type {
+      stroke: #ffe600;
+    }
+  </style>
+
+  {% for logy in analogy %}
+
+  <div class="card">
+    <div class="percent">
+      <svg>
+        <circle cx="105" cy="105" r="100"></circle>
+        <circle cx="105" cy="105" r="100" style="--percent: {{logy.percent}}"></circle>
+      </svg>
+      <div class="number">
+        <h3>{{logy.percent}}<span>%</span></h3>
+      </div>
+    </div>
+    <div class="title">
+      <h2>{{logy.title}}</h2>
+    </div>
+  </div>
+
+
+
+  {% endfor%}
+</div>
+{%endif %}
+
+
+
+
+
 <hr />
 
 
+
+{% if link %}
+<div style="background-color:rgb(154, 229, 154); color: blue;">
+  <h3 style="text-align: center;">Best Buy Link</h3>
+</div>
+
+
+<div style="display: flex; align-items: center; font-family: 'Montserrat', sans-sherif;height: auto;color: #555555;overflow: hidden;justify-content: center;flex-wrap: wrap">
+{% for l in link %}
+<a href="{{l.link}}" target="_blank">
+<div class="card" style="background-image: linear-gradient(120deg, #2600ff 0%, #ff00aa 100%);
+background-repeat:repeat-x;
+margin: 20px 20px;
+width: 280px;
+height: 70px;
+border-radius: 30px;
+box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
+">
+    <h1 style="color: rgb(255, 255, 255);">{{l.site}}</h1>
+ 
+</div>
+</a>
+{% endfor %}
+</div>
+{%endif%}
 
 <div style="background-color:rgb(174, 234, 174); color: blue;">
-<h3 style="text-align: center;">Videos Review Links</h3>
+  <h3 style="text-align: center;">Videos Review Links</h3>
+</div>
+
+
+
+<div class="rate">
+  <input type="radio" id="star5" name="rate" value="5" />
+  <label for="star5" title="text">5 stars</label>
+  <input type="radio" id="star4" name="rate" value="4" />
+  <label for="star4" title="text">4 stars</label>
+  <input type="radio" id="star3" name="rate" value="3" />
+  <label for="star3" title="text">3 stars</label>
+  <input type="radio" id="star2" name="rate" value="2" />
+  <label for="star2" title="text">2 stars</label>
+  <input type="radio" id="star1" name="rate" value="1" />
+  <label for="star1" title="text">1 star</label>
 </div>
 
 
@@ -133,11 +342,78 @@ margin-right: auto; collapse; width: 90%; height: 115px;" border="3">
 
 
 <div style="background-color:rgb(194, 239, 194); color: blue;">
-<h3 style="text-align: center;">Similer Pruducts</h3>
+  <h3 style="text-align: center;">Similer Pruducts</h3>
 </div>
 <hr />
 <h3>&nbsp;</h3>
 
+
+
+<div style="background-color:rgb(194, 239, 194); color: blue;">
+  <h3 style="text-align: center;">Feedback</h3>
+</div>
+
+
+
+<div class="comments-box">
+  <h5>{{comments.count}} REPSONSES</h5>
+
+  {% for comment in comments%}
+  {% if comment.is_author%}
+  <div class="media">
+      <img class="media-object pull-left" src="/static/assets/png/author-writing.png" alt="author-writing">
+      <div class="media-body">
+        <h6 class="media-heading">{{comment.name}}<span>{{comment.date}}</span> </h6>
+        <p>{{comment.comment}}</p>
+      </div>	<!-- End of /.meida-body -->
+  </div>	<!-- End of /.media -->
+  {% else %}
+  
+  <!-- reply -->
+  <div class="media reply">
+      <img class="media-object pull-left" src="/static/assets/png/public-ask.png" alt="public-ask">
+      <div class="media-body">
+        <h6 class="media-heading">{{comment.name}}<span>{{comment.date}}</span></h6>
+        <p>{{comment.comment}}</p>
+      </div>
+  </div>
+  {% endif%}
+  
+  {% endfor %}
+  
+</div>	<!-- End of /.comments-box -->
+
+<div class="leave-comment">
+  <h5>LEAVE A COMMENT</h5>
+  <form class="form-horizontal" role="form" method="POST">{% csrf_token %}
+    <div class="form-group">
+        <label for="inputname" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputname" placeholder="Name" name='name'>
+        </div>
+      </div>	<!-- End of /.form-group -->
+      <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email" name='email'>
+        </div>
+      </div>	<!-- End of /.form-group -->
+
+      <div class="form-group">
+        <label for="inputmessage" class="col-sm-2 control-label">Message</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="inputmessage"  rows="3" name='comment'></textarea>
+        </div>
+      </div>	<!-- End of /.form-group -->
+        
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </div>	<!-- End of /.form-group -->
+  </form>	<!-- End of /.form-horizontal -->
+</div>	<!-- End of /.leave comments -->
+</div>	<!-- End of /.col-md-9 -->
 
 
 
