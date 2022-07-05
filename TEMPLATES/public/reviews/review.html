@@ -319,20 +319,6 @@ box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
 
 
 
-<div class="rate">
-  <input type="radio" id="star5" name="rate" value="5" />
-  <label for="star5" title="text">5 stars</label>
-  <input type="radio" id="star4" name="rate" value="4" />
-  <label for="star4" title="text">4 stars</label>
-  <input type="radio" id="star3" name="rate" value="3" />
-  <label for="star3" title="text">3 stars</label>
-  <input type="radio" id="star2" name="rate" value="2" />
-  <label for="star2" title="text">2 stars</label>
-  <input type="radio" id="star1" name="rate" value="1" />
-  <label for="star1" title="text">1 star</label>
-</div>
-
-
 <hr />
 <p>&nbsp;</p>
 <p><iframe src="//www.youtube.com/embed/tgbNymZ7vqY" width="420" height="315"></iframe></p>
@@ -353,8 +339,58 @@ box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
   <h3 style="text-align: center;">Feedback</h3>
 </div>
 
+<div class="contener" style="background-color: rgb(224, 222, 222);">
+
+<div style="display: flex; align-items: center; font-family: 'Montserrat', sans-sherif;height: auto;background-color: #afc2ebad;color: #555555;justify-content: center;flex-wrap: wrap">
 
 
+
+  <a  style="margin: 10px 10px ;"  href="/Reviews/like">
+    <img height="50" width="50" src="/static/assets/png/like.png">
+  </a>
+  <h1>23</h1>
+  <a  style="margin: 10px 10px ;"  href="/Reviews/dislike">
+    <img height="50" width="50" src="/static/assets/png/dislike.png">
+  </a>
+  <h1>05</h1>
+
+ 
+
+  <a  style="margin: 10px 10px ;"  href="https://www.facebook.com">
+    <img height="70" width="280" src="/static/assets/png/facebook-share-button.png">
+  </a>
+  <a style="margin: 10px 10px ;"  href="https://www.facebook.com">
+    <img height="70" width="280" src="/static/assets/png/facebook-share-button.png">
+  </a>
+  <a style="margin: 10px 10px ;" href="https://www.facebook.com">
+    <img height="70" width="280" src="/static/assets/png/facebook-share-button.png">
+  </a>
+
+
+
+</div>
+
+<div style="display: flex; align-items: center; height: auto;justify-content:  center;background-color: white;flex-wrap: wrap" >
+
+<h3>rate this review</h3>
+
+  <div class="rate">
+    <input type="radio" id="star5" name="rate" value="5" />
+    <label for="star5" title="text">5 stars</label>
+    <input type="radio" id="star4" name="rate" value="4" />
+    <label for="star4" title="text">4 stars</label>
+    <input type="radio" id="star3" name="rate" value="3" />
+    <label for="star3" title="text">3 stars</label>
+    <input type="radio" id="star2" name="rate" value="2" />
+    <label for="star2" title="text">2 stars</label>
+    <input type="radio" id="star1" name="rate" value="1" />
+    <label for="star1" title="text">1 star</label>
+  </div>
+
+
+</div>
+
+<!--Coment coade-->
 <div class="comments-box">
   <h5>{{comments.count}} REPSONSES</h5>
 
@@ -415,7 +451,7 @@ box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
 </div>	<!-- End of /.leave comments -->
 </div>	<!-- End of /.col-md-9 -->
 
-
+</div>
 
 
 {% endblock body %}

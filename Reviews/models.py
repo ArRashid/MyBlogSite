@@ -64,12 +64,8 @@ class Review(models.Model):
             'comments':self.get_comment,
             'activeapp':'REVIEWS'
         }
-
         return var
    
-
-
-    
     
 
 
