@@ -54,7 +54,6 @@ class Review(models.Model):
     def get_comment(self):
         return Comment.objects.filter(review=self).all()
     def get_all(self):
-        print(self.product_id)
         var = {
             'product': self.get_product(),
             'rating': self.get_rating(),

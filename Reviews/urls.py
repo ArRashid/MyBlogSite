@@ -18,6 +18,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.Index )
+    path('', views.Index ),
+     path('<int:pageno>', views.Pages ),
+    path('byid/<int:reviewid>',views.ReviewByID )
+   
    
 ]

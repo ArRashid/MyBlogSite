@@ -136,12 +136,11 @@ margin-right: auto; collapse; width: 90%; height: 115px;" border="3">
 
 
 
+<!-- This is for get all ratig for the product-->
+{% if rating %}
 <div style="background-color:rgb(133, 224, 133); color: blue; height:50px">
   <h3 style="text-align: center; ">Ratings</h3>
 </div>
-
-
-<!-- This is for get all ratig for the product-->
 <div
   style="background-image: linear-gradient(120deg, #e1f7cb 0%, #ebedee 100%);
 background-repeat: no-repeat;height:auto;color: #555555; display: flex; align-items: center; justify-content: center; background-color:red;">
@@ -159,6 +158,7 @@ background-repeat: no-repeat;height:auto;color: #555555; display: flex; align-it
   </div>
   {% endfor %}
 </div>
+{% endif%}
 
 
 
@@ -313,11 +313,13 @@ box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
 </div>
 {%endif%}
 
+
+
+
+{% if videos %}
 <div style="background-color:rgb(174, 234, 174); color: blue;">
   <h3 style="text-align: center;">Videos Review Links</h3>
 </div>
-
-
 
 <hr />
 <p>&nbsp;</p>
@@ -332,7 +334,7 @@ box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
 </div>
 <hr />
 <h3>&nbsp;</h3>
-
+{%endif%}
 
 
 <div style="background-color:rgb(194, 239, 194); color: blue;">
@@ -342,7 +344,6 @@ box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
 <div class="contener" style="background-color: rgb(224, 222, 222);">
 
 <div style="display: flex; align-items: center; font-family: 'Montserrat', sans-sherif;height: auto;background-color: #afc2ebad;color: #555555;justify-content: center;flex-wrap: wrap">
-
 
 
   <a  style="margin: 10px 10px ;"  href="/Reviews/like">
@@ -356,15 +357,13 @@ box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
 
  
 
-  <a  style="margin: 10px 10px ;"  href="https://www.facebook.com">
-    <img height="70" width="280" src="/static/assets/png/facebook-share-button.png">
-  </a>
-  <a style="margin: 10px 10px ;"  href="https://www.facebook.com">
-    <img height="70" width="280" src="/static/assets/png/facebook-share-button.png">
-  </a>
-  <a style="margin: 10px 10px ;" href="https://www.facebook.com">
-    <img height="70" width="280" src="/static/assets/png/facebook-share-button.png">
-  </a>
+
+<div id="fb-root" style="padding-left: 100px;">
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/bn_IN/sdk.js#xfbml=1&version=v14.0" nonce="rgfpJDoG"></script>
+<div class="fb-share-button" data-href="https://www.wix.com" data-layout="box_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">ShareFB</a></div>
+</div>
+
+
 
 
 
@@ -372,7 +371,7 @@ box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
 
 <div style="display: flex; align-items: center; height: auto;justify-content:  center;background-color: white;flex-wrap: wrap" >
 
-<h3>rate this review</h3>
+<h3>Give Rate This Review</h3>
 
   <div class="rate">
     <input type="radio" id="star5" name="rate" value="5" />

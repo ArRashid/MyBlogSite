@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+
+
+{% include 'appsmenu.html' %}  
+
+	<!-- Breadcrumbs Start
+    ================================================== -->
+
+	<section id="topic-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<a href='/blog'>
+					<h1>Reviews</h1>
+					</a>
+					{%if current_category%}
+					<p><b>{{current_category}}</b></p>
+					 {% else %}
+					<p>All Latest Reviews</p>
+					{% endif%}
+				</div>	<!-- End of /.col-md-4 -->	
+				
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</section>	<!-- End of /#Topic-header -->
+
+
+	<section id="blog">
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-md-9 clearfix">
+					<ul class="blog-zone">
+						{% for post in reviews %}
+					    <li>
+					        <div class="blog-icon">
+					        	<i class="fa  fa-pencil"></i>
+					        </div>
+					        <div class="blog-box">
+								
+								{%if post.cover %}
+					        	<img src="/media/{{post.cover}}" alt="{{post.title}}">
+					            {% endif%}
+								
+					            <div class="blog-post-body clearfix">
+						            <a href="/reviews/byid/{{post.id}}">
+					            		<h2>{{post.title}}</h2>
+						            </a>
+					            	<div class="blog-post-tag">
+						            	<div class="block">
+						            		<i class="fa fa-clock-o"></i>
+						            		<p>{{post.date}}</p>
+						            	</div>
+						            	<div class="block">
+						            		<i class="fa fa-user"></i>
+						            		<p>{{post.author}}</p>
+						            	</div>
+						            	<div class="block">
+						            		<i class="fa fa-tags"></i>
+						            		<p>
+						            			<a href="{{post.category}}">{{post.category}}</a>
+						            		</p>
+						            	</div>
+						            </div>
+						            <p>{{post.content |safe|truncatewords:100}}</p>
+						            <a href="/reviews/byid/{{post.id}}" class="btn btn-default btn-transparent pull-right" role="button">
+								        <span>Read More</span>
+								    </a>
+					            </div>
+					        </div>	<!-- End of /.blog-box -->
+					    </li>
+						{% endfor %}
+					    <li>
+					        <div class="blog-icon">
+					        	<i class="fa  fa-video-camera"></i>
+					        </div>
+
+					
+					<!-- Pagination -->
+					 <ul class="pagination pull-right">
+
+						<!-- previews button -->
+						 {% if index != 0%}
+					  	<li><a href="{{index}}">&laquo;</a></li>
+						  {% endif%}
+
+						<!-- Page no -->
+						{% for n in pages %}
+					  	<li {% if n == index %}
+						  class = 'active'
+					  	  {% endif %}><a href="{{n|add:1}}">{{n|add:1}}<span class="sr-only"></span></a></li>
+						{%endfor%}
+
+						<!-- next button -->
+						{% if index|add:1 in pages %}
+						<li><a href="{{index|add:2}}">» </a></li>
+						{%endif%}
+
+					</ul>	<!-- End of /.pagination -->
+				</div>	<!-- End of /.col-md-9 -->
+
+				<div class="col-md-3">
+					<div class="blog-sidebar">
+						{% if category%}
+						<div class="block">
+							<h4>Catagories</h4>
+							<div class="list-group" >
+								{% for cat in category %}
+								<a href="category/{{cat.category}}/" class="list-group-item" >
+									<i class="fa  fa-dot-circle-o"></i>
+									{{cat.category}}
+								</a>
+								{% endfor%}
+							
+								
+							</div>
+						</div>	<!-- End of /.block -->
+						{% endif%}
+
+
+						{% if pposts%}
+						<div class="block">
+							<h4>Latest Posts</h4>
+							<ul class="media-list">
+								{% for post in pposts%}
+							 	<li class="media">
+							    	<a class="pull-left" href="#">
+										{%if post.cover%}
+							      		<img class="media-object" src="/media/{{post.cover}}" alt="{{post.title}}">
+										{% else%}
+										<img class="media-object" src="/static/assets/png/default-post.png" alt="arrashid">
+										{%endif%}
+							    	</a>
+							    	<div class="media-body">
+							      		<a href="/reviews/byid/{{post.id}}" class="media-heading">
+							      			{{post.title}}</a>
+							    	  	<p>{{post.date}}</p>
+							    	</div>
+							  	</li>	<!-- End of /.media -->
+								{%endfor%}
+							</ul>	<!-- End of /.media-list -->
+						</div>	<!-- End of /.block -->
+						{% endif%}
+
+
+
+						{% if tags%}
+						<div class="block">
+							<h4>Tag Cloud</h4>
+							<div class="tag-link">
+								{% for tag in tags %}
+								<a href="/blog/tag/{{tag.name}}">{{tag.name}}</a>
+							{% endfor%}
+							</div>	
+						</div>	<!-- End of /.block -->
+						{% endif%}
+						
+					</div>	<!-- End of /.blog-sidebar -->
+				</div>	<!-- End of /.col-md-3 -->
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</section>	<!-- End of /#Blog -->
+		
+{% endblock body %}
