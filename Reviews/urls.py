@@ -19,8 +19,10 @@ from . import views
 
 urlpatterns = [
     path('', views.Index ),
-     path('<int:pageno>', views.Pages ),
-    path('byid/<int:reviewid>',views.ReviewByID )
-   
+    path('<int:pageno>', views.Pages ),
+    path('byid/<int:reviewid>',views.ReviewByID ),
+    path('like/<int:reviewid>',views.ReviewLike ),
+    path('dislike/<int:reviewid>',views.ReviewDislike )
+  
    
 ]

@@ -53,6 +53,8 @@ class Review(models.Model):
         return Analogy.objects.filter(product=self.product).all()
     def get_comment(self):
         return Comment.objects.filter(review=self).all()
+    def get_like(self):
+        return Like.objects.filter(review=self).all()
     def get_all(self):
         var = {
             'product': self.get_product(),
@@ -61,6 +63,7 @@ class Review(models.Model):
             'link' : self.get_link(),
             'review' : self,
             'comments':self.get_comment,
+            'likes' : self.get_like(),
             'activeapp':'REVIEWS'
         }
         return var
@@ -101,6 +104,14 @@ class Comment(models.Model):
     email = models.EmailField(default='no@email.exist')
     comment = models.TextField()
     is_author = models.BooleanField(default=False)
+
+class Like(models.Model):
+    id = models.AutoField(primary_key=True)
+    review = models.ForeignKey(Review,on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,blank=True)
+    is_like  = models.BooleanField(default=True)
+
+   
 
 
 

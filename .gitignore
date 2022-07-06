@@ -1,6 +1,7 @@
 __pycache__/
 Media/
 STATIC/
+migrations/
 *.png
 *.jpeg
 *.sqlite3
