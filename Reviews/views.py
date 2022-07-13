@@ -1,6 +1,7 @@
 from curses.ascii import HT
 from unicodedata import category
 from django.shortcuts import render,HttpResponse,redirect
+from datetime import date
 
 from .models import *
 
@@ -43,22 +44,34 @@ def get_catposts(category,show=5,page=1):
 
 # Create your views here.
 
+# showing recievies Headline
 def Index(request):
     return render(request,"public/reviews/review-index.html",get_allposts())
 
+def Pages(request,pageno): 
+    return render(request,"public/reviews/review-index.html",context=get_allposts(page=pageno))
 
 
-def Pages(request,pageno):
-        return render(request,"public/reviews/review-index.html",context=get_allposts(page=pageno))
 
-
+#showin actual Reviews
 def ReviewByID(request,reviewid):
+
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        comment = request.POST['comment']
+        newcomment = Comment(name=name,email=email,comment=comment,review_id=reviewid,date=date.today())
+        newcomment.save()
+        return redirect('/reviews/byid/{0}'.format(reviewid))
+    else:
     
-    review =  Review.objects.filter(id=reviewid).first()
-    vk = review.get_all()
-    return render(request,"public/reviews/review.html",context=vk)
+        review =  Review.objects.filter(id=reviewid).first()
+        vk = review.get_all()
+        return render(request,"public/reviews/review.html",context=vk)
 
 
+
+#geting like/dislike  froom a review
 def ReviewLike(request, reviewid):
 
     if request.user.is_authenticated:

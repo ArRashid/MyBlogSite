@@ -67,3 +67,7 @@ def Check_user_login_or_not(request):
     else:
       return HttpResponse("no user loged in")
 
+
+def MySelf(request):
+    return render(request,"public/myself.html")
+

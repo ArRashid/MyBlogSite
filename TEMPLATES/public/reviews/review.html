@@ -70,7 +70,7 @@ background-repeat: no-repeat;color: blue; width: 100%; height: 43px;"
   <tbody>
     <tr>
       <td style="width: 100%;  text-align:center;">
-        <h1 color="white">{{review.title}}</h1>
+        <h1 style="color: blue;">{{review.title}}</h1>
       </td>
     </tr>
   </tbody>
@@ -100,9 +100,15 @@ background-repeat: no-repeat;color: blue; width: 100%; height: 43px;"
 {%if review%}
 <hr />
 
+<div style="padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-left: 20px;">
+
 
 {{review.spec | safe}}
 
+</div>
 {% endif %}
 
 {%if review.pros or review.cons%}

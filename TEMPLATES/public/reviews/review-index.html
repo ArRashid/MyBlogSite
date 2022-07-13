@@ -67,7 +67,7 @@
 						            </div>
 						            <p>{{post.content |safe|truncatewords:100}}</p>
 						            <a href="/reviews/byid/{{post.id}}" class="btn btn-default btn-transparent pull-right" role="button">
-								        <span>Read More</span>
+								        <span>Read This Review</span>
 								    </a>
 					            </div>
 					        </div>	<!-- End of /.blog-box -->
@@ -123,17 +123,10 @@
 
 						{% if pposts%}
 						<div class="block">
-							<h4>Latest Posts</h4>
+							<h4>Latest Reviews</h4>
 							<ul class="media-list">
 								{% for post in pposts%}
 							 	<li class="media">
-							    	<a class="pull-left" href="#">
-										{%if post.cover%}
-							      		<img class="media-object" src="/media/{{post.cover}}" alt="{{post.title}}">
-										{% else%}
-										<img class="media-object" src="/static/assets/png/default-post.png" alt="arrashid">
-										{%endif%}
-							    	</a>
 							    	<div class="media-body">
 							      		<a href="/reviews/byid/{{post.id}}" class="media-heading">
 							      			{{post.title}}</a>
