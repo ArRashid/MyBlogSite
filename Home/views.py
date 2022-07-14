@@ -1,9 +1,10 @@
 
+from email import message
 from django.shortcuts import render,HttpResponse,redirect
-from Home.models import Features
+from Home.models import *
 from django.contrib.auth import authenticate, login,logout
 from users.models import CustomUser
-
+from django.http import FileResponse, Http404
 
 # Create your views here.
 
@@ -69,5 +70,29 @@ def Check_user_login_or_not(request):
 
 
 def MySelf(request):
-    return render(request,"public/myself.html")
+
+
+    if request.method == "POST":
+       
+       newcontact = ContactMe(name=request.POST['name'],subject=request.POST['subject'],email=request.POST['email'],message=request.POST['message'] )
+       newcontact.save()
+       return redirect("/myself")
+
+    
+    else:
+        context  ={
+            'certificates' :  MyCertificate.objects.all()
+        }
+        return render(request,"public/myself.html",context)
+
+def GetCv(request):
+   
+      
+    return FileResponse(open('STATIC/myself/cv/AbdurRashidMondal.pdf', 'rb'), content_type='application/pdf')
+    try:
+        pass
+    except FileNotFoundError:
+        raise Http404()
+
+
 
