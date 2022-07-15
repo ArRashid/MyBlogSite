@@ -21,6 +21,8 @@ urlpatterns = [
     path('', views.Index ),
     path('<int:pageno>', views.Pages ),
     path('byid/<int:reviewid>',views.ReviewByID ),
+    path('category/<str:category>/',views.ReviewByCategory ),
+    path('category/<str:category>/<int:pageno>',views.ReviewByCategory ),
     path('like/<int:reviewid>',views.ReviewLike ),
     path('dislike/<int:reviewid>',views.ReviewDislike )
   

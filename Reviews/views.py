@@ -1,5 +1,3 @@
-from curses.ascii import HT
-from unicodedata import category
 from django.shortcuts import render,HttpResponse,redirect
 from datetime import date
 
@@ -24,18 +22,25 @@ def get_allposts(show=5,page=1):
     return context
 
 def get_catposts(category,show=5,page=1):
-    cat  = Category.objects.filter(category=category).values('id')    
-    posts = Review.objects.all().filter(category=cat[0]['id'],is_published=True).order_by('-date')    # Blog object quarry
+    reviews = Review.objects.all().order_by('-date') 
+    cat  = Category.objects.filter(category=category).values('id')
+    pdct  =  Product.objects.filter(category_id=cat[0]['id']).all()
+    print(pdct)  
+    posts = Review.objects.all().filter(product__id__in=pdct)    # Blog object quarry
+
+
     pno =range(int(posts.count()/show))   # range of pages 
     index = (page -1) * show #shat showin post from here 
     context = {
-            'posts' : posts[index:index + show],
+            'reviews' : posts[index:index + show],
             'pages' : pno,
             'index' : page - 1,
-            'current_category':category,
+            'category': Category.objects.all(),
             'tags': False ,
             'pposts':False,
-            'activeapp':'BLOG'
+            'pposts': reviews[:3] ,
+            'current_category': category ,
+            'activeapp':'REVIEWS'
         }
     return context
 
@@ -68,6 +73,11 @@ def ReviewByID(request,reviewid):
         review =  Review.objects.filter(id=reviewid).first()
         vk = review.get_all()
         return render(request,"public/reviews/review.html",context=vk)
+
+
+
+def ReviewByCategory(request,category,pageno=1):
+     return render(request,"public/reviews/review-index.html",context=get_catposts(category,page=pageno))
 
 
 
