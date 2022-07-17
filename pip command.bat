@@ -4,3 +4,4 @@ pip install psycopg2
 pip install django-taggit
 pip install django-ckeditor
 pip install django-ckeditor --upgrade
+pip install djangorestframework

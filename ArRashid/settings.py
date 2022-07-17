@@ -32,9 +32,11 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     #libs
+    'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
     #appp
+    'API.apps.ApiConfig',
     'Reviews.apps.ReviewsConfig',
     'Dashboard.apps.DashboardConfig',
     'Blog.apps.BlogConfig',

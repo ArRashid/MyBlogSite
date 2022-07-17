@@ -29,6 +29,7 @@ urlpatterns = [
     path('blog/', include("Blog.urls")),
     path('dashboard/', include("Dashboard.urls")),
     path('reviews/', include("Reviews.urls")),
+    path('api/', include("API.urls")),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG or True:
