@@ -1,7 +1,3 @@
-
-import imp
-from re import T
-from unicodedata import category
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from datetime import date
