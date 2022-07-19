@@ -1,6 +1,3 @@
 __pycache__/
-Media/
 migrations/
-*.png
-*.jpeg
 *.sqlite3
